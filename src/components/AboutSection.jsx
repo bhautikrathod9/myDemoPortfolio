@@ -1,110 +1,96 @@
 import { Briefcase, Code, Cpu, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="py-24 px-4 relative">
-      {" "}
+    <motion.section
+      id="about"
+      className="py-24 px-4 relative"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, amount: 0.3 }} // Set once to false
+      transition={{ duration: 0.5 }}
+    >
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold mb-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }} // Set once to false
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           About <span className="text-primary"> Me</span>
-        </h2>
+        </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            {/* <h3 className="text-2xl font-semibold">
-              Passionate Web Developer & Tech Creator
-            </h3>
-
-            <p className="text-muted-foreground">
-              With over 5 years of experience in web development, I specialize
-              in creating responsive, accessible, and performant web
-              applications using modern technologies.
-            </p>
-
-            <p className="text-muted-foreground">
-              I'm passionate about creating elegant solutions to complex
-              problems, and I'm constantly learning new technologies and
-              techniques to stay at the forefront of the ever-evolving web
-              landscape.
-            </p> */}
-            <h3 className="text-2xl font-semibold">
+            <motion.h3
+              className="text-2xl font-semibold"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }} // Set once to false
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
               Aspiring Full-Stack Developer & Problem Solver
-            </h3>
+            </motion.h3>
 
-            <p className="text-muted-foreground">
+            <motion.p
+              className="text-muted-foreground"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }} // Set once to false
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
               As an intermediate web developer, I build responsive and efficient applications 
               across both frontend and backend. My toolkit includes modern frameworks and a 
               growing expertise in system design.
-            </p>
+            </motion.p>
 
-            <p className="text-muted-foreground">
+            <motion.p
+              className="text-muted-foreground"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }} // Set once to false
+              transition={{ duration: 0.5, delay: 0.8 }}
+            >
               Currently deepening my Data Structures and Algorithms knowledge to write 
               optimized code and tackle technical challenges with confidence. Every project 
               is an opportunity to level up my skills.
-            </p>
+            </motion.p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-              <a href="#contact" className="cosmic-button">
-                {" "}
+              <motion.a
+                href="#contact"
+                className="cosmic-button"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }} // Set once to false
+                transition={{ duration: 0.5, delay: 1 }}
+              >
                 Get In Touch
-              </a>
+              </motion.a>
 
-              <a
+              <motion.a
                 href="https://drive.google.com/file/d/15kXBArhApjdJM4AEIcqXorr9_yXnMZhx/view?usp=drive_link"
                 className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }} // Set once to false
+                transition={{ duration: 0.5, delay: 1.2 }}
               >
                 Download CV
-              </a>
+              </motion.a>
             </div>
           </div>
 
-          {/* <div className="grid grid-cols-1 gap-6">
-            <div className="gradient-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Code className="h-6 w-6 text-primary" />
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg"> Web Development</h4>
-                  <p className="text-muted-foreground">
-                    Creating responsive websites and web applications with
-                    modern frameworks.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="gradient-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <User className="h-6 w-6 text-primary" />
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">UI/UX Design</h4>
-                  <p className="text-muted-foreground">
-                    Designing intuitive user interfaces and seamless user
-                    experiences.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="gradient-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Briefcase className="h-6 w-6 text-primary" />
-                </div>
-
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">Project Management</h4>
-                  <p className="text-muted-foreground">
-                    Leading projects from conception to completion with agile
-                    methodologies.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div> */}
           <div className="grid grid-cols-1 gap-6">
-            <div className="gradient-border p-6 card-hover">
+            <motion.div
+              className="gradient-border p-6 card-hover"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.3 }} // Set once to false
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-full bg-primary/10">
                   <Code className="h-6 w-6 text-primary" />
@@ -117,12 +103,18 @@ export const AboutSection = () => {
                   </p>
                 </div>
               </div>
-            </div>
-            
-            <div className="gradient-border p-6 card-hover">
+            </motion.div>
+
+            <motion.div
+              className="gradient-border p-6 card-hover"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.3 }} // Set once to false
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-full bg-primary/10">
-                  <Cpu className="h-6 w-6 text-primary" />  {/* Changed from User to Cpu icon */}
+                  <Cpu className="h-6 w-6 text-primary" />
                 </div>
                 <div className="text-left">
                   <h4 className="font-semibold text-lg">Problem Solving</h4>
@@ -132,12 +124,18 @@ export const AboutSection = () => {
                   </p>
                 </div>
               </div>
-            </div>
-            
-            <div className="gradient-border p-6 card-hover">
+            </motion.div>
+
+            <motion.div
+              className="gradient-border p-6 card-hover"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.3 }} // Set once to false
+              transition={{ duration: 0.5, delay: 0.8 }}
+            >
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-full bg-primary/10">
-                  <Zap className="h-6 w-6 text-primary" />  {/* Changed from Briefcase to Zap icon */}
+                  <Zap className="h-6 w-6 text-primary" />
                 </div>
                 <div className="text-left">
                   <h4 className="font-semibold text-lg">Fast Learning</h4>
@@ -147,10 +145,10 @@ export const AboutSection = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
