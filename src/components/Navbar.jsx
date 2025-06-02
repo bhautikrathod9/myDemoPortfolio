@@ -120,7 +120,7 @@ export const Navbar = () => {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "relative px-3 py-2 rounded-lg",
+                  "relative px-3 py-2 hidden md:flex rounded-lg",
                   "text-foreground/80 hover:text-primary",
                   activeItem.toLowerCase() === item.name.toLowerCase() 
                     ? "text-primary font-medium" 
@@ -166,7 +166,7 @@ export const Navbar = () => {
           </motion.div>
 
           <motion.div 
-            className="absolute right-4 md:right-8"
+            className="absolute hidden md:flex right-4 md:right-8"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.8 }}
