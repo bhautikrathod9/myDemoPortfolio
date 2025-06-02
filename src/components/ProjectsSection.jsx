@@ -1,4 +1,5 @@
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
+import { motion } from "framer-motion";
 
 const projects = [
   {
@@ -36,34 +37,52 @@ export const ProjectsSection = () => {
   return (
     <section id="projects" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          {" "}
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold mb-4 text-center"
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.5 }}
+        >
           Featured <span className="text-primary"> Projects </span>
-        </h2>
+        </motion.h2>
 
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+        <motion.p
+          className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto"
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           Here are some of my recent projects. Each project was carefully
           crafted with attention to detail, performance, and user experience.
-        </p>
+        </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, key) => (
-            <div
+            <motion.div
               key={key}
               className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover"
+              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: key * 0.1 }}
             >
               <div className="h-48 overflow-hidden">
-                <img
+                <motion.img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  whileInView={{ scale: 1 }}
+                  initial={{ scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
                 />
               </div>
 
               <div className="p-6">
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground">
+                  {project.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground"
+                    >
                       {tag}
                     </span>
                   ))}
@@ -78,6 +97,7 @@ export const ProjectsSection = () => {
                     <a
                       href={project.demoUrl}
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="text-foreground/80 hover:text-primary transition-colors duration-300"
                     >
                       <ExternalLink size={20} />
@@ -85,6 +105,7 @@ export const ProjectsSection = () => {
                     <a
                       href={project.githubUrl}
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="text-foreground/80 hover:text-primary transition-colors duration-300"
                     >
                       <Github size={20} />
@@ -92,18 +113,21 @@ export const ProjectsSection = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         <div className="text-center mt-12">
-          <a
+          <motion.a
             className="cosmic-button w-fit flex items-center mx-auto gap-2"
             target="_blank"
             href="https://github.com/bhautikrathod9"
+            whileInView={{ scale: 1.05 }}
+            initial={{ scale: 1 }}
+            transition={{ duration: 0.3 }}
           >
             Check My Github <ArrowRight size={16} />
-          </a>
+          </motion.a>
         </div>
       </div>
     </section>
