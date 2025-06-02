@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { ThemeToggle } from "./ThemeToggle"; // Adjust import path as needed
+import { ThemeToggle } from "./ThemeToggle";
 
 const navItems = [
   { name: "Home", href: "#hero" },
@@ -13,93 +12,117 @@ const navItems = [
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [activeItem, setActiveItem] = useState("Home");
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const currentScrollY = window.scrollY;
+      
+      // For desktop, always show navbar
+      if (window.innerWidth >= 768) {
+        setIsScrolled(currentScrollY > 10);
+        setVisible(true);
+        return;
+      }
+
+      // Mobile behavior
+      setIsScrolled(currentScrollY > 10);
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setVisible(false);
+      } else if (currentScrollY < lastScrollY) {
+        setVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+
+      // Update active nav item based on scroll position
+      const sections = document.querySelectorAll("section");
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= sectionTop - 200 && window.scrollY < sectionTop + sectionHeight - 200) {
+          setActiveItem(section.id.charAt(0).toUpperCase() + section.id.slice(1));
+        }
+      });
     };
 
+    const checkDarkMode = () => {
+      setIsDarkMode(document.documentElement.classList.contains('dark'));
+    };
+
+    checkDarkMode();
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
+  }, [lastScrollY]);
+
+  const getBackgroundColor = () => {
+    if (isDarkMode) {
+      return isScrolled ? 'rgba(10, 10, 10, 0.85)' : 'transparent';
+    }
+    return isScrolled ? 'rgba(255, 255, 255, 0.85)' : 'transparent';
+  };
 
   return (
     <nav
       className={cn(
-        "fixed w-full z-50 transition-all duration-300 border-b",
+        "fixed w-full z-50 transition-all duration-300",
         isScrolled
-          ? "py-2 bg-background/90 backdrop-blur-md border-border/10 shadow-sm"
-          : "py-4 border-transparent"
+          ? "py-2 border-b"
+          : "py-4 border-b border-transparent",
+        !visible && "transform -translate-y-full"
       )}
+      style={{
+        background: getBackgroundColor(),
+        backdropFilter: isScrolled ? 'blur(12px)' : 'none',
+        WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
+        boxShadow: isScrolled ? '0 4px 30px rgba(0, 0, 0, 0.1)' : 'none',
+        borderColor: isScrolled ? (isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)') : 'transparent',
+      }}
     >
-      <div className="container mx-auto px-4 flex items-center justify-between max-w-7xl">
-        <a
-          className="text-2xl font-bold text-primary flex items-center group"
-          href="#hero"
-        >
-          <span className="relative z-10">
-            <span className="text-foreground group-hover:text-primary transition-colors">
-              My
-            </span>{" "}
-            <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-              Portfolio
-            </span>
-          </span>
-        </a>
-
-        <div className="flex items-center gap-6">
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item, key) => (
-              <a
-                key={key}
-                href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
-
-          {/* Theme Toggle */}
-          <ThemeToggle className="hidden md:block" />
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen((prev) => !prev)}
-            className="md:hidden p-2 text-foreground z-50"
-            aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+      <div className="container mx-auto px-4 flex items-center justify-center max-w-7xl">
+        {/* Centered Navigation */}
+        <div className="flex items-center gap-1 sm:gap-4 md:gap-8">
+          {navItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className={cn(
+                "relative px-3 py-2 rounded-lg transition-all duration-300",
+                "text-foreground/80 hover:text-primary",
+                activeItem.toLowerCase() === item.name.toLowerCase() 
+                  ? "text-primary font-medium" 
+                  : ""
+              )}
+              onClick={() => setActiveItem(item.name)}
+            >
+              {item.name}
+              {activeItem.toLowerCase() === item.name.toLowerCase() && (
+                <>
+                  <span className="absolute inset-0 bg-primary/10 rounded-lg" />
+                  <span className="absolute bottom-0 left-1/2 h-0.5 w-4 bg-primary -translate-x-1/2" />
+                </>
+              )}
+              <span className="absolute inset-0 rounded-lg hover:bg-primary/5 transition-all duration-300" />
+            </a>
+          ))}
         </div>
 
-        {/* Mobile Menu */}
-        <div
-          className={cn(
-            "fixed inset-0 bg-background/95 backdroup-blur-md z-40 flex flex-col items-center justify-center",
-            "transition-all duration-300 md:hidden",
-            isMenuOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
-          )}
-        >
-          <div className="flex flex-col space-y-8 text-xl">
-            {navItems.map((item, key) => (
-              <a
-                key={key}
-                href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
-          <div className="mt-8">
-            <ThemeToggle />
-          </div>
+        {/* Theme Toggle - positioned absolutely on larger screens */}
+        <div className="absolute right-4 md:right-8">
+          <ThemeToggle />
         </div>
       </div>
     </nav>
