@@ -57,7 +57,7 @@ export const HeroSection = () => {
               Hi, I'm
             </motion.span>
             <motion.span 
-              className="text-primary"
+              className="text-gradient ml-2"
               variants={textVariants}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
