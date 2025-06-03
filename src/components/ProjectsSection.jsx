@@ -4,33 +4,33 @@ import { motion } from "framer-motion";
 const projects = [
   {
     id: 1,
-    title: "SaaS Landing Page",
+    title: "Nike Landing Page",
     description: "A beautiful landing page app using React and Tailwind.",
-    image: "/projects/project1.png",
-    tags: ["React", "TailwindCSS", "Supabase"],
-    demoUrl: "#",
-    githubUrl: "#",
+    image: "/projects/project2.png",
+    tags: ["React", "TailwindCSS"],
+    demoUrl: "https://nike-landing-page-bhautik.vercel.app/",
+    githubUrl: "https://github.com/bhautikrathod9/nike-landing-page",
   },
   {
     id: 2,
-    title: "Orbit Analytics Dashboard",
+    title: "HRMS",
     description:
-      "Interactive analytics dashboard with data visualization and filtering capabilities.",
-    image: "/projects/project2.png",
-    tags: ["TypeScript", "D3.js", "Next.js"],
+      "Built a full-stack HRMS web app with JWT-based authentication, Cloudinary image uploads, and PostgreSQL-backed employee management.",
+    image: "/projects/project4.png",
+    tags: ["React.js", "Postgres", "Node.js"],
     demoUrl: "#",
     githubUrl: "#",
   },
-  {
-    id: 3,
-    title: "E-commerce Platform",
-    description:
-      "Full-featured e-commerce platform with user authentication and payment processing.",
-    image: "/projects/project3.png",
-    tags: ["React", "Node.js", "Stripe"],
-    demoUrl: "#",
-    githubUrl: "#",
-  },
+  // {
+  //   id: 3,
+  //   title: "E-commerce Platform",
+  //   description:
+  //     "Full-featured e-commerce platform with user authentication and payment processing.",
+  //   image: "/projects/project3.png",
+  //   tags: ["React", "Node.js", "Stripe"],
+  //   demoUrl: "#",
+  //   githubUrl: "#",
+  // },
 ];
 
 export const ProjectsSection = () => {
