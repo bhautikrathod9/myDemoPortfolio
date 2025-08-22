@@ -18,7 +18,7 @@ const projects = [
       "Built a full-stack HRMS web app with JWT-based authentication, Cloudinary image uploads, and PostgreSQL-backed employee management.",
     image: "/projects/project4.png",
     tags: ["React.js", "Postgres", "Node.js"],
-    demoUrl: "#",
+    demoUrl: "https://hrms-final-ashy.vercel.app/",
     githubUrl: "#",
   },
   // {
